@@ -1,21 +1,30 @@
-let humanScore = 0;
-let computerScore = 0;
-
-
 playGame();
 
 
-
 function playGame() {
-
+	let humanScore = 0;
+	let computerScore = 0;
+	let whoWin;
 	for (let i = 1; i <= 5; i++) {
-		let computerSelection = getComputerChoice();
-		console.log("Computer choice: " + computerSelection);
 		let humanSelection = getHumanChoice();
 		console.log("Human choice: " + humanSelection);
+		let computerSelection = getComputerChoice();
+		console.log("Computer choice: " + computerSelection);
 		console.log("-------- Round " + i + " --------");
-		playRound(humanSelection, computerSelection);
+		whoWin = playRound(humanSelection, computerSelection);
+		if (whoWin === 1)
+		{
+			humanScore += 1;
+		}
+		else if (whoWin === 2)
+		{
+			computerScore += 1;
+		}
 	}
+	console.log("Result Announcements");
+	console.log("Human: " + humanScore);
+	console.log("Computer: " + computerScore);
+	
 }
 
 
@@ -24,6 +33,7 @@ function playRound(humanSelection, computerSelection) {
 	computerSelection = computerSelection.toUpperCase();
 	if (humanSelection === computerSelection) {
 		console.log(`You both chose ${humanSelection}. Draw!`);
+		return 0;
 	}
 	else {
 		switch (humanSelection) {
@@ -31,36 +41,36 @@ function playRound(humanSelection, computerSelection) {
 				if (computerSelection === "SCISSORS")
 			{
 				console.log(`You win. Rock beats scissors!`);
-				humanScore += 1;
+				return 1;
 			}
 			else if (computerSelection === "PAPER")
 			{
 				console.log(`You lose. Paper wraps rock!`);
-				computerScore += 1;
+				return 2;
 			}
 			break;
 		case "PAPER":
 			if (computerSelection === "ROCK")
 			{
 				console.log(`You win. Paper wraps rock!`);
-				humanScore += 1;
+				return 1;
 			}
 			else if (computerSelection === "SCISSORS")
 			{
 				console.log("You lose. Scissors cut paper!");
-				computerScore += 1;
+				return 2;
 			}
 			break;
 		case "SCISSORS":
 			if (computerSelection === "ROCK")
 			{
 				console.log("You win. Rock beats scissors!");
-				humanScore += 1;
+				return 1;
 			}
 			else if (computerSelection === "PAPER")
 			{
 				console.log("You lose. Scissors cut paper!");
-				computerScore += 1;
+				return 2;
 			}
 			break;
 		}
