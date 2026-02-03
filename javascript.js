@@ -2,13 +2,22 @@ let humanScore = 0;
 let computerScore = 0;
 
 
-let computerSelection = getcomputerSelection();
-console.log("Computer choice: " + computerSelection);
-let humanSelection = gethumanSelection();
-console.log("Human choice: " + humanSelection);
+playGame();
 
-playRound(humanSelection, computerSelection);
-console.table([humanScore, computerScore])
+
+
+function playGame() {
+
+	for (let i = 1; i <= 5; i++) {
+		let computerSelection = getComputerChoice();
+		console.log("Computer choice: " + computerSelection);
+		let humanSelection = getHumanChoice();
+		console.log("Human choice: " + humanSelection);
+		console.log("-------- Round " + i + " --------");
+		playRound(humanSelection, computerSelection);
+	}
+}
+
 
 function playRound(humanSelection, computerSelection) {
 	humanSelection = humanSelection.toUpperCase();
@@ -59,13 +68,13 @@ function playRound(humanSelection, computerSelection) {
 }
 
 
-function gethumanSelection() {
+function getHumanChoice() {
 	let input = prompt("Rock - Paper - Scissors");
 	return input;
 }
 
 
-function getcomputerSelection() {
+function getComputerChoice() {
 	let randomValue = Math.floor(Math.random() * 3) + 1;
 
 	if (randomValue === 1) { return "Rock"; }
